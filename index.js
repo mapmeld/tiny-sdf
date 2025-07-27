@@ -20,6 +20,7 @@ export default class TinySDF {
 
         const canvas = this._createCanvas(size);
         const ctx = this.ctx = canvas.getContext('2d', {willReadFrequently: true});
+        ctx.lang = (document && document.body && document.body.lang) || ctx.lang;
         ctx.font = `${fontStyle} ${fontWeight} ${fontSize}px ${fontFamily}`;
 
         ctx.textBaseline = 'alphabetic';
@@ -67,6 +68,7 @@ export default class TinySDF {
         if (glyphWidth === 0 || glyphHeight === 0) return glyph;
 
         const {ctx, buffer, gridInner, gridOuter} = this;
+        ctx.lang = (document && document.body && document.body.lang) || ctx.lang;
         ctx.clearRect(buffer, buffer, glyphWidth, glyphHeight);
         ctx.fillText(char, buffer, buffer + glyphTop);
         const imgData = ctx.getImageData(buffer, buffer, glyphWidth, glyphHeight);
